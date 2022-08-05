@@ -1,7 +1,5 @@
 # useLocalStorage hook
 ```
-typescript
-
 import { useCallback, useEffect, useState } from 'react';
 
 export function useLocalStorage<T>(initialValue: T, key: string) {
