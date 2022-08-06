@@ -1,4 +1,4 @@
-## useLocalStorage hook
+## useLocalStorage { hook }
 ```typescript
 import { useCallback, useEffect, useState } from 'react';
 
@@ -25,7 +25,7 @@ export function useLocalStorage<T>(initialValue: T, key: string) {
 }
 ```
 
-## useInput hook
+## useInput { hook } 
 ```typescript
 import React, { useCallback, useState } from 'react';
 
@@ -52,7 +52,7 @@ export const useInput = (initialValue: string): UseInputValue => {
 };
 ```
 
-## useToggleTheme hook utilize for Tailwind.css
+## useToggleTheme { hook utilize for Tailwind.css }
 ```typescript
 import { useLayoutEffect, useState } from 'react';
 
