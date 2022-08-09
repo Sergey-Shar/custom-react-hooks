@@ -73,6 +73,7 @@ export const useDarkMode = () => {
 		setTheme,
 	};
 };
+```
 
 ## useToggle { hook 🪝  }
 ```typescript
