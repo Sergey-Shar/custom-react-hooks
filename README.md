@@ -93,5 +93,20 @@ export const useToggle = (initialState:boolean) => {
     setState,
   };
 };
+```
+
+## useActions { hook  🪝 utilize for Redux Toolkit }
+```typescript
+import { bindActionCreators } from '@reduxjs/toolkit';
+import { actions } from 'redux/actions';
+
+import { useAppDispatch } from './useRedux';
+
+export const useActions = () => {
+  const dispatch = useAppDispatch();
+  return bindActionCreators(actions, dispatch);
+};
+```
+
 
 
