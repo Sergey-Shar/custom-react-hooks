@@ -74,4 +74,23 @@ export const useDarkMode = () => {
 	};
 };
 
+## useToggle { hook 🪝  }
+```typescript
+import React from 'react';
+
+export const useToggle = (initialState:boolean) => {
+
+  const [state, setState] = React.useState(initialState);
+
+  const toggle = () => {
+    setState(!state);
+  };
+
+  return {
+    state,
+    toggle,
+    setState,
+  };
+};
+
 
