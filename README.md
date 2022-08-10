@@ -113,10 +113,13 @@ export const useActions = () => {
 import { useState, useCallback } from 'react'
 
 export const useCount = (initialValue:number) => {
-const [count, setCount] = useState(initialValue)
+const [count, setCount] = useState(initialValue);
 
-const increment = useCallback(() => { setCount( count++ )},[count])
-const decrement = useCallback(() => { setCount( count-- )},[count])
+const increment = useCallback(() => {
+setCount((currentValue) => currentValue++ )},[]);
+
+const decrement = useCallback(() => { 
+setCount((currentValue) => currentValue++ )},[]);
 
 return {count, increment, decrement }
 }
