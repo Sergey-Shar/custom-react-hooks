@@ -83,9 +83,9 @@ export const useToggle = (initialState:boolean) => {
 
   const [state, setState] = React.useState(initialState);
 
-  const toggle = () => {
-    setState(!state);
-  };
+  const toggle = useCallback(() => {
+    setState((currentState) => !currentState);
+  },[]);
 
   return {
     state,
