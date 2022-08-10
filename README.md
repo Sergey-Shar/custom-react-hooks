@@ -110,18 +110,26 @@ export const useActions = () => {
 
 ## useCount { hook 🪝  }
 ```typescript
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect } from 'react';
 
-export const useCount = (initialValue:number) => {
-const [count, setCount] = useState(initialValue);
+export const useCount = (initialValue: number) => {
+  const [count, setCount] = useState(initialValue);
+  useEffect(() => {
+    if (count < 0) {
+      setCount(0);
+    }
+  }, [count]);
 
-const increment = useCallback(() => {
-setCount((currentValue) => currentValue++ )},[]);
+  const increment = useCallback(() => {
+    setCount((currentValue) => currentValue + 1);
+  }, []);
 
-const decrement = useCallback(() => { 
-setCount((currentValue) => currentValue++ )},[]);
-
-return {count, increment, decrement }
+  const decrement = useCallback(() => {
+    setCount((currentValue) => currentValue - 1);
+  }, []);
+    
+  return { count, increment, decrement };
+};
 }
 ```
 
