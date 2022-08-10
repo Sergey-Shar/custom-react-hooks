@@ -112,7 +112,7 @@ export const useActions = () => {
 ```typescript
 import { useState, useCallback } from 'react'
 
-export function useCount<T>(initialValue:T) => {
+export const useCount = (initialValue:number) => {
 const [count, setCount] = useState(initialValue)
 
 const increment = useCallback(() => { setCount( count++ )},[count])
