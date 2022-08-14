@@ -54,6 +54,7 @@ export const useInput = (initialValue: string) => {
     ref,
   };
 };
+```
 
 ## useValidation { hook 🪝 }
 ```typescript
