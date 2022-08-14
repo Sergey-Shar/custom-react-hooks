@@ -41,6 +41,14 @@ export const useInput = (initialValue: string): UseInputValue => {
   const onChahge = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value);
   }, []);
+  
+    const onBlur = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+    setDirty(true);
+  }, []);
+
+  const ref = useCallback((element: HTMLInputElement) => {
+    element?.focus();
+  }, []);
 
   const clear = useCallback(() => setValue(''), []);
 
@@ -48,7 +56,49 @@ export const useInput = (initialValue: string): UseInputValue => {
     clear,
     value,
     onChahge,
+    onBlur,
+    ref,
   };
+};
+
+## useValidation { hook 🪝 }
+```typescript
+
+export const useValidation = (value , validations) => {
+    
+  const [errorEmpty, setErrorEmpty] = useState('');
+  const [errorName, setErrorName] = useState('');
+
+  const [isEmpty, setEmpty] = useState(true);
+  const [isName, setName] = useState(true);
+
+  const regEX = useMemo(() => /^[a-zA-Z][a-zA-Z0-9-_.]{3,20}$/, []);
+    
+  useEffect(() => {
+    for (const validation in validations) {
+      switch (validation) {
+      case 'isEmpty':
+        if (value.trim().length) {
+          setEmpty(false);
+        }
+        else {
+          setEmpty(true);
+          setErrorEmpty('The field cannot be empty');
+        }
+        break;
+      case 'isName':     
+        if (regEX.test(value)) {
+          setName(false);
+        } else {
+          setName(true);
+          setErrorName('Enter the correct name');
+        }
+        break;
+      }
+    }
+  }, [regEX, validations, value]);
+
+  return{isEmpty,isName,errorEmpty,errorName};
 };
 ```
 
