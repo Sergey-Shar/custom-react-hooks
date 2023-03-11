@@ -17,20 +17,20 @@ export function useFetch<T>(url: string, options = {}): IFetch<T> {
 	const [error, setError] = useState<AxiosError | null>(null)
 
 	useEffect(() => {
-		getFetch(options)
+	getFetch(options)
 	}, [])
 
 	const getFetch = useCallback(async (opt = options) => {
 		setLoading(true)
 		try {
-		const { data } = await axios.get<T[]>(url, { ...opt })
-		setData(data)
+		  const { data } = await axios.get<T[]>(url, { ...opt })
+		  setData(data)
 		} catch (error) {
-		if (axios.isAxiosError(error)) {
-		setError(error)
+		  if (axios.isAxiosError(error)) {
+		  setError(error)
 		}
 		} finally {
-		setLoading(false)
+		  setLoading(false)
 		}
 		}, [])
 
