@@ -1,4 +1,4 @@
-## useLocalStorage { hook 🪝 }
+## useFetch{ hook 🪝 }
 
 ```typescript
 import { useCallback, useEffect, useState } from 'react'
