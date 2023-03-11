@@ -5,36 +5,36 @@ import { useCallback, useEffect, useState } from 'react'
 import axios, { AxiosError } from 'axios'
 
 interface IFetch<T> {
-	data: T[]
-	isLoading: boolean
-	error: AxiosError | null
-	refetch: (options: {}) => Promise<void>
+ data: T[]
+ isLoading: boolean
+ error: AxiosError | null
+ refetch: (options: {}) => Promise<void>
 }
 
 export function useFetch<T>(url: string, options = {}): IFetch<T> {
-	const [data, setData] = useState<T[]>([])
-	const [isLoading, setLoading] = useState(false)
-	const [error, setError] = useState<AxiosError | null>(null)
+const [data, setData] = useState<T[]>([])
+const [isLoading, setLoading] = useState(false)
+const [error, setError] = useState<AxiosError | null>(null)
 
-	useEffect(() => {
-	getFetch(options)
-	}, [])
+useEffect(() => {
+ getFetch(options)
+ }, [])
 
-	const getFetch = useCallback(async (opt = options) => {
-		setLoading(true)
-		try {
-		  const { data } = await axios.get<T[]>(url, { ...opt })
-		  setData(data)
-		} catch (error) {
-		  if (axios.isAxiosError(error)) {
-		  setError(error)
-		}
-		} finally {
-		  setLoading(false)
-		}
-		}, [])
+const getFetch = useCallback(async (opt = options) => {
+setLoading(true)
+   try {
+    const { data } = await axios.get<T[]>(url, { ...opt })
+    setData(data)
+   } catch (error) {
+    if (axios.isAxiosError(error)) {
+    setError(error)
+   }
+   } finally {
+    setLoading(false)
+   }
+   }, [])
 
-	return { data, isLoading, error, refetch: getFetch }
+return { data, isLoading, error, refetch: getFetch }
 }
 ```
 
@@ -44,26 +44,25 @@ export function useFetch<T>(url: string, options = {}): IFetch<T> {
 import { useEffect, useState } from 'react'
 
 const getValue = <T>(initialValue: T, key: string):T => {
-	const storage = localStorage.getItem(key)
+const storage = localStorage.getItem(key)
 	
-	if (storage !== null) {
-	return JSON.parse(storage)
-	}
-	if (initialValue instanceof Function) {
-	return initialValue()
-	}
-	return initialValue
+if (storage !== null) {
+ return JSON.parse(storage)
+  }
+ if (initialValue instanceof Function) {
+ return initialValue()
+  }
+ return initialValue
 }
 
 export function useLocalStorage<T>(initialValue: T, key: string) {
-
-	const [value, setValue] = useState(() => getValue(initialValue,key))
+const [value, setValue] = useState(() => getValue(initialValue,key))
 	
-	useEffect(() => {
-        localStorage.setItem(key, JSON.stringify(value))
-	}, [value])
-
-	return { value, setValue }
+useEffect(() => {
+  localStorage.setItem(key, JSON.stringify(value))
+   }, [value])
+   
+   return { value, setValue }
 }
 
 ```
@@ -74,17 +73,17 @@ export function useLocalStorage<T>(initialValue: T, key: string) {
 import { useCallback, useState } from 'react'
 
 export const useInput = (initialValue: string) => {
-	const [value, setValue] = useState(initialValue)
+const [value, setValue] = useState(initialValue)
  
-	const onChange: ChangeEventHandler<HTMLInputElement> = useCallback(
-	({ target: { value } }) => {
-	setValue(value)},[])
+const onChange: ChangeEventHandler<HTMLInputElement> = useCallback(
+  ({ target: { value } }) => {
+  setValue(value)},[])
 
-	const ref = useCallback((element: HTMLInputElement): void => element?.focus(), [])
+const ref = useCallback((element: HTMLInputElement): void => element?.focus(), [])
 
-	const clear = useCallback(() => setValue(''), [])
+const clear = useCallback(() => setValue(''), [])
 
-	return { clear, value, onChange, ref }
+   return { clear, value, onChange, ref }
 }
 ```
 
@@ -135,18 +134,18 @@ export const useValidation = (value , validations) => {
 import { useLayoutEffect, useState } from 'react';
 
 export const useDarkMode = () => {
-	const [theme, setTheme] = useState<string>(localStorage.theme);
+const [theme, setTheme] = useState<string>(localStorage.theme);
 
-	const colorTheme = theme === 'dark' ? 'light' : 'dark';
+const colorTheme = theme === 'dark' ? 'light' : 'dark';
 
-	useLayoutEffect(() => {
-		const root = window.document.documentElement;
-		root.classList.remove(colorTheme);
-		root.classList.add(theme);
-		localStorage.setItem('theme', theme);
-	}, [colorTheme, theme]);
+useLayoutEffect(() => {
+   const root = window.document.documentElement;
+   root.classList.remove(colorTheme);
+   root.classList.add(theme);
+   localStorage.setItem('theme', theme);
+   }, [colorTheme, theme]);
 
-	return { colorTheme, setTheme };
+   return { colorTheme, setTheme };
 };
 ```
 
