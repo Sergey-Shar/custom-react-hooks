@@ -152,18 +152,17 @@ useLayoutEffect(() => {
 ## useToggle { hook 🪝  }
 
 ```typescript
-import React from 'react';
+import { useState, useCallback } from 'react';
 
-export const useToggle = (initialState:boolean) => {
+export const useToggle = (initialState: boolean) => {
+ const [isState, setState] = useState(initialState)
 
-  const [state, setState] = React.useState(initialState);
+ const toggleValue = useCallback(() => {
+  setState((currentState) => !currentState)
+ }, [])
 
-  const toggle = useCallback(() => {
-    setState((currentState) => !currentState);
-  },[]);
-
-  return { state, toggle, setState };
-};
+ return { isState, toggleValue }
+}
 ```
 
 ## useActions { hook  🪝 utilize for Redux Toolkit }
