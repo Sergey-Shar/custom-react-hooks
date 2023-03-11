@@ -59,7 +59,7 @@ const getValue = <T>(initialValue: T, key: string):T => {
 	return initialValue
 }
 
-export function useLocalStorage2<T>(initialValue: T, key: string) {
+export function useLocalStorage<T>(initialValue: T, key: string) {
 
 	const [value, setValue] = useState(() => getValue(initialValue,key))
 	
