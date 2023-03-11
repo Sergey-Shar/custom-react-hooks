@@ -23,23 +23,18 @@ export function useFetch<T>(url: string, options = {}): IFetch<T> {
 	const getFetch = useCallback(async (opt = options) => {
 		setLoading(true)
 		try {
-			const { data } = await axios.get<T[]>(url, { ...opt })
-			setData(data)
+		const { data } = await axios.get<T[]>(url, { ...opt })
+		setData(data)
 		} catch (error) {
-			if (axios.isAxiosError(error)) {
-				setError(error)
-			}
-		} finally {
-			setLoading(false)
+		if (axios.isAxiosError(error)) {
+		setError(error)
 		}
-	}, [])
+		} finally {
+		setLoading(false)
+		}
+		}, [])
 
-	return {
-		data,
-		isLoading,
-		error,
-		refetch: getFetch
-	}
+	return { data, isLoading, error, refetch: getFetch }
 }
 ```
 
@@ -52,10 +47,10 @@ const getValue = <T>(initialValue: T, key: string):T => {
 	const storage = localStorage.getItem(key)
 	
 	if (storage !== null) {
-		return JSON.parse(storage)
+	return JSON.parse(storage)
 	}
 	if (initialValue instanceof Function) {
-		return initialValue()
+	return initialValue()
 	}
 	return initialValue
 }
@@ -82,9 +77,8 @@ export const useInput = (initialValue: string) => {
 	const [value, setValue] = useState(initialValue)
  
 	const onChange: ChangeEventHandler<HTMLInputElement> = useCallback(
-		({ target: { value } }) => {
-		 setValue(value)
-		},[])
+	({ target: { value } }) => {
+	setValue(value)},[])
 
 	const ref = useCallback((element: HTMLInputElement): void => element?.focus(), [])
 
@@ -213,6 +207,7 @@ export const useCount = (initialValue: number) => {
 }
 ```
 ## useDebounce { hook 🪝  }
+
 ```typescript
 import { useEffect, useState } from "react";
 
