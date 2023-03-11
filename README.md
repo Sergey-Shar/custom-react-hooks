@@ -44,6 +44,7 @@ export function useFetch<T>(url: string, options = {}): IFetch<T> {
 ```
 
 ## useLocalStorage { hook 🪝 }
+
 ```typescript
 import { useEffect, useState } from 'react'
 
@@ -67,15 +68,13 @@ export function useLocalStorage<T>(initialValue: T, key: string) {
         localStorage.setItem(key, JSON.stringify(value))
 	}, [value])
 
-	return {
-         value, 
-         setValue
-	 }
+	return { value, setValue }
 }
 
 ```
 
 ## useInput { hook 🪝 } 
+
 ```typescript
 import { useCallback, useState } from 'react'
 
@@ -85,26 +84,18 @@ export const useInput = (initialValue: string) => {
 	const onChange: ChangeEventHandler<HTMLInputElement> = useCallback(
 		({ target: { value } }) => {
 		 setValue(value)
-		},
-		[]
-	)
+		},[])
 
-	const ref = useCallback((element: HTMLInputElement): void => {
-	 element?.focus()
-	}, [])
+	const ref = useCallback((element: HTMLInputElement): void => element?.focus(), [])
 
 	const clear = useCallback(() => setValue(''), [])
 
-	return {
-		clear,
-		value,
-		onChange,
-		ref
-	}
+	return { clear, value, onChange, ref }
 }
 ```
 
 ## useValidation { hook 🪝 }
+
 ```typescript
 export const useValidation = (value , validations) => {
     
@@ -140,11 +131,12 @@ export const useValidation = (value , validations) => {
     }
   }, [regEX, validations, value]);
 
-  return{isEmpty,isName,errorEmpty,errorName};
+  return{ isEmpty, isName, errorEmpty, errorName };
 };
 ```
 
 ## useToggleTheme { hook 🪝 utilize for Tailwind.css }
+
 ```typescript
 import { useLayoutEffect, useState } from 'react';
 
@@ -160,14 +152,12 @@ export const useDarkMode = () => {
 		localStorage.setItem('theme', theme);
 	}, [colorTheme, theme]);
 
-	return {
-		colorTheme,
-		setTheme,
-	};
+	return { colorTheme, setTheme };
 };
 ```
 
 ## useToggle { hook 🪝  }
+
 ```typescript
 import React from 'react';
 
@@ -179,15 +169,12 @@ export const useToggle = (initialState:boolean) => {
     setState((currentState) => !currentState);
   },[]);
 
-  return {
-    state,
-    toggle,
-    setState,
-  };
+  return { state, toggle, setState };
 };
 ```
 
 ## useActions { hook  🪝 utilize for Redux Toolkit }
+
 ```typescript
 import { bindActionCreators } from '@reduxjs/toolkit';
 import { actions } from 'redux/actions';
@@ -201,6 +188,7 @@ export const useActions = () => {
 ```
 
 ## useCount { hook 🪝  }
+
 ```typescript
 import { useState, useCallback, useEffect } from 'react';
 
