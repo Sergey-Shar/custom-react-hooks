@@ -56,13 +56,13 @@ if (storage !== null) {
 }
 
 export function useLocalStorage<T>(initialValue: T, key: string) {
-const [value, setValue] = useState(() => getValue(initialValue,key))
+ const [value, setValue] = useState(() => getValue(initialValue,key))
 	
-useEffect(() => {
+ useEffect(() => {
   localStorage.setItem(key, JSON.stringify(value))
    }, [value])
    
-   return { value, setValue }
+ return { value, setValue }
 }
 
 ```
@@ -73,17 +73,17 @@ useEffect(() => {
 import { useCallback, useState } from 'react'
 
 export const useInput = (initialValue: string) => {
-const [value, setValue] = useState(initialValue)
+ const [value, setValue] = useState(initialValue)
  
-const onChange: ChangeEventHandler<HTMLInputElement> = useCallback(
+ const onChange: ChangeEventHandler<HTMLInputElement> = useCallback(
   ({ target: { value } }) => {
   setValue(value)},[])
 
-const ref = useCallback((element: HTMLInputElement): void => element?.focus(), [])
+ const ref = useCallback((element: HTMLInputElement): void => element?.focus(), [])
 
-const clear = useCallback(() => setValue(''), [])
+ const clear = useCallback(() => setValue(''), [])
 
-   return { clear, value, onChange, ref }
+ return { clear, value, onChange, ref }
 }
 ```
 
@@ -92,34 +92,34 @@ const clear = useCallback(() => setValue(''), [])
 ```typescript
 export const useValidation = (value , validations) => {
     
-  const [errorEmpty, setErrorEmpty] = useState('');
-  const [errorName, setErrorName] = useState('');
+ const [errorEmpty, setErrorEmpty] = useState('');
+ const [errorName, setErrorName] = useState('');
 
-  const [isEmpty, setEmpty] = useState(true);
-  const [isName, setName] = useState(true);
+ const [isEmpty, setEmpty] = useState(true);
+ const [isName, setName] = useState(true);
 
-  const regEX = useMemo(() => /^[a-zA-Z][a-zA-Z0-9-_.]{3,20}$/, []);
+ const regEX = useMemo(() => /^[a-zA-Z][a-zA-Z0-9-_.]{3,20}$/, []);
     
-  useEffect(() => {
-    for (const validation in validations) {
-      switch (validation) {
-      case 'isEmpty':
-        if (value.trim().length) {
-          setEmpty(false);
-        }
-        else {
-          setEmpty(true);
-          setErrorEmpty('The field cannot be empty');
-        }
-        break;
-      case 'isName':     
-        if (regEX.test(value)) {
-          setName(false);
-        } else {
-          setName(true);
-          setErrorName('Enter the correct name');
-        }
-        break;
+ useEffect(() => {
+  for (const validation in validations) {
+   switch (validation) {
+   case 'isEmpty':
+   if (value.trim().length) {
+    setEmpty(false);
+   }
+   else {
+    setEmpty(true);
+    setErrorEmpty('The field cannot be empty');
+   }
+    break;
+    case 'isName':     
+     if (regEX.test(value)) {
+      setName(false);
+   } else {
+      setName(true);
+      setErrorName('Enter the correct name');
+   }
+    break;
       }
     }
   }, [regEX, validations, value]);
@@ -134,11 +134,10 @@ export const useValidation = (value , validations) => {
 import { useLayoutEffect, useState } from 'react';
 
 export const useDarkMode = () => {
-const [theme, setTheme] = useState<string>(localStorage.theme);
-
-const colorTheme = theme === 'dark' ? 'light' : 'dark';
-
-useLayoutEffect(() => {
+ const [theme, setTheme] = useState<string>(localStorage.theme);
+ const colorTheme = theme === 'dark' ? 'light' : 'dark';
+ 
+ useLayoutEffect(() => {
    const root = window.document.documentElement;
    root.classList.remove(colorTheme);
    root.classList.add(theme);
@@ -174,8 +173,8 @@ import { actions } from 'redux/actions';
 import { useAppDispatch } from './useRedux';
 
 export const useActions = () => {
-  const dispatch = useAppDispatch();
-  return bindActionCreators(actions, dispatch);
+ const dispatch = useAppDispatch();
+ return bindActionCreators(actions, dispatch);
 };
 ```
 
