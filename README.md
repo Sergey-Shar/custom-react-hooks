@@ -1,4 +1,49 @@
 ## useLocalStorage { hook 🪝 }
+
+```typescript
+import { useCallback, useEffect, useState } from 'react'
+import axios, { AxiosError } from 'axios'
+
+interface IFetch<T> {
+	data: T[]
+	isLoading: boolean
+	error: AxiosError | null
+	refetch: (options: {}) => Promise<void>
+}
+
+export function useFetch<T>(url: string, options = {}): IFetch<T> {
+	const [data, setData] = useState<T[]>([])
+	const [isLoading, setLoading] = useState(false)
+	const [error, setError] = useState<AxiosError | null>(null)
+
+	useEffect(() => {
+		getFetch(options)
+	}, [])
+
+	const getFetch = useCallback(async (opt = options) => {
+		setLoading(true)
+		try {
+			const { data } = await axios.get<T[]>(url, { ...opt })
+			setData(data)
+		} catch (error) {
+			if (axios.isAxiosError(error)) {
+				setError(error)
+			}
+		} finally {
+			setLoading(false)
+		}
+	}, [])
+
+	return {
+		data,
+		isLoading,
+		error,
+		refetch: getFetch
+	}
+}
+```
+
+## useLocalStorage { hook 🪝 }
 ```typescript
 import { useCallback, useEffect, useState } from 'react';
 
