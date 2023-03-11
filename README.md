@@ -77,33 +77,31 @@ export function useLocalStorage<T>(initialValue: T, key: string) {
 
 ## useInput { hook 🪝 } 
 ```typescript
-import React, { useCallback, useState } from 'react';
+import { useCallback, useState } from 'react'
 
 export const useInput = (initialValue: string) => {
-  const [value, setValue] = useState(initialValue);
+	const [value, setValue] = useState(initialValue)
+ 
+	const onChange: ChangeEventHandler<HTMLInputElement> = useCallback(
+		({ target: { value } }) => {
+		 setValue(value)
+		},
+		[]
+	)
 
-  const onChahge = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(event.target.value);
-  }, []);
-  
-    const onBlur = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    setDirty(true);
-  }, []);
+	const ref = useCallback((element: HTMLInputElement): void => {
+	 element?.focus()
+	}, [])
 
-  const ref = useCallback((element: HTMLInputElement) => {
-    element?.focus();
-  }, []);
+	const clear = useCallback(() => setValue(''), [])
 
-  const clear = useCallback(() => setValue(''), []);
-
-  return {
-    clear,
-    value,
-    onChahge,
-    onBlur,
-    ref,
-  };
-};
+	return {
+		clear,
+		value,
+		onChange,
+		ref
+	}
+}
 ```
 
 ## useValidation { hook 🪝 }
