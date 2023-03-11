@@ -21,20 +21,20 @@ useEffect(() => {
  }, [])
 
 const getFetch = useCallback(async (opt = options) => {
-setLoading(true)
-   try {
-    const { data } = await axios.get<T[]>(url, { ...opt })
-    setData(data)
-   } catch (error) {
-    if (axios.isAxiosError(error)) {
-    setError(error)
-   }
-   } finally {
-    setLoading(false)
-   }
-   }, [])
+ setLoading(true)
+  try {
+   const { data } = await axios.get<T[]>(url, { ...opt })
+   etData(data)
+  } catch (error) {
+   if (axios.isAxiosError(error)) {
+   setError(error)
+  }
+  } finally {
+   setLoading(false)
+  }
+ }, [])
 
-return { data, isLoading, error, refetch: getFetch }
+ return { data, isLoading, error, refetch: getFetch }
 }
 ```
 
