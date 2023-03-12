@@ -24,7 +24,7 @@ const getFetch = useCallback(async (opt = options) => {
  setLoading(true)
   try {
    const { data } = await axios.get<T[]>(url, { ...opt })
-   etData(data)
+   setData(data)
   } catch (error) {
    if (axios.isAxiosError(error)) {
    setError(error)
