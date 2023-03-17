@@ -1,3 +1,71 @@
+
+
+## useDebounce { hook 🪝  }
+
+```typescript
+import { useEffect } from 'react';
+import { useTimeout } from "./timeout";
+
+export function useDebounce<T>(
+ callback:Function,
+ delay: number,
+ dependencies: T[]
+):void {
+
+ // the useTimeout hook is described below...
+ const { resetTimeout, clearTimeout } = useTimeout(callback, delay)
+ 
+ useEffect(resetTimeout, [...dependencies, resetTimeout])
+ 
+ useEffect(clearTimeout, [])
+}
+```
+## useTimeout{ hook 🪝 }
+
+```typescript
+import { useCallback, useEffect, useRef } from 'react'
+
+interface IUseTimeout {
+ clearTimeout: () => void
+ resetTimeout: () => void
+}
+
+export function useTimeout<S>(callback: Function, delay: number): IUseTimeout {
+ const callbackRef = useRef(callback)
+ const timeoutId = useRef<number | null>(null)
+
+ useEffect(() => {
+  callbackRef.current = callback
+ }, [callback])
+
+ const startTimeout = useCallback(() => {
+  timeoutId.current = setTimeout(() => callbackRef.current(), delay)
+ }, [delay])
+
+ const clearTimeout = useCallback(() => {
+  if (timeoutId.current) {
+  clearInterval(timeoutId.current)
+  }
+ }, [])
+
+ const resetTimeout = useCallback(() => {
+  clearTimeout()
+  startTimeout()
+ }, [startTimeout, clearTimeout])
+
+ useEffect(() => {
+  startTimeout()
+  return clearTimeout
+ }, [delay, clearTimeout, startTimeout])
+
+ return {
+  clearTimeout,
+  resetTimeout
+ }
+}
+
+```
+
 ## useFetch{ hook 🪝 }
 
 ```typescript
@@ -203,22 +271,7 @@ export const useCount = (initialValue: number) => {
 };
 }
 ```
-## useDebounce { hook 🪝  }
 
-```typescript
-import { useEffect, useState } from "react";
-
-export const useDebounce = (value: string, delay = 3000): string => {
-const [debounced, setDebounced] = useState(value);
-
-useEffect(() => {
-const handler = setTimeout(() => setDebounced(value), delay);
-return () => clearTimeout(handler);
-}, [delay, value]);
-
-return debounced;
-};
-```
 
 
 
