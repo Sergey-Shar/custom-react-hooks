@@ -70,6 +70,34 @@ export function useTimeout<S>(callback: Function, delay: number): IUseTimeout {
 </details>
 	
 <details>
+<summary>useThrottle{ hook 🪝 }</summary>
+
+```typescript
+import { useState, useRef, useEffect } from 'react'
+
+export function useThrottle<T>(value: T, interval = 250):T {
+ const [throttleValue, setThrottleValue] = useState(value)
+ const lastExecuted = useRef(Date.now())
+
+ useEffect(() => {
+  if (Date.now() >= lastExecuted.current + interval) {
+   lastExecuted.current = Date.now()
+   setThrottleValue(value)
+  } else {
+    const id = setTimeout(() => {
+     lastExecuted.current = Date.now()
+     setThrottleValue(value)
+    }, interval)
+    return () => clearInterval(id)
+   }
+  }, [value, interval])
+
+  return throttleValue
+}
+```
+</details>
+	
+<details>
 <summary>useFetch{ hook 🪝 }</summary>
 
 ```typescript
