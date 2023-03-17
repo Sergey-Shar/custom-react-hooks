@@ -20,9 +20,10 @@ export function useDebounce<T>(
  useEffect(clearTimeout, [])
 }
 ```
+</details>
+	
 ## useTimeout{ hook 🪝 }
 
-<br>
 ```typescript
 import { useCallback, useEffect, useRef } from 'react'
 
@@ -66,7 +67,6 @@ export function useTimeout<S>(callback: Function, delay: number): IUseTimeout {
 }
 
 ```
-</details>
 
 ## useFetch{ hook 🪝 }
 
