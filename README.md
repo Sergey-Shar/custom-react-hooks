@@ -1,3 +1,5 @@
+<p align='right'> < React /></p>
+<h1 align='center'> Custom hooks </h1>
 
 <details>
 <summary>useDebounce { hook 🪝  }</summary>
