@@ -1,7 +1,7 @@
 
 <h1 align='center'> React Custom Hooks Using Typescript</h1>
 
-<p>In this repository, I decided to collect hooks that I somehow use in my React projects. Maybe someone will find them useful too. Or some of you want to share your experience in this regard. I welcome it.</p>
+<h2> In this repository, I decided to collect hooks that I somehow use in my React projects. Maybe someone will find them useful too. Or some of you want to share your experience in this regard. I welcome it. </h2>
 
 <details>
 <summary>useDebounce { hook 🪝  }</summary>
