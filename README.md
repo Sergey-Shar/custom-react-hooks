@@ -1,5 +1,5 @@
 
-<h1 align='center'> React Custom Hooks Using Typescript</h1>
+<h1 align='center'> React custom hooks using Typescript</h1>
 
 ## In this repository, I decided to collect hooks that I somehow use in my React projects.
 Maybe someone will find them useful too. Or some of you want to share your experience in this regard. 
