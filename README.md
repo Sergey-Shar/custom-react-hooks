@@ -165,7 +165,7 @@ export function useWindowEvent(
 </details>
 
 <details>
-<summary>useWindowSckroll { hook 🪝 }</summary>
+<summary>useWindowScroll { hook 🪝 }</summary>
 	
 ```typescript
 import { useState, useEffect } from 'react'
