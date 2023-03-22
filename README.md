@@ -27,7 +27,7 @@ export function useDebounce<T>(
 </details>
 
 <details>
-<summary>useTimeout{ hook 🪝 }</summary>
+<summary>useTimeout { hook 🪝 }</summary>
 
 ```typescript
 import { useCallback, useEffect, useRef } from 'react'
@@ -74,7 +74,7 @@ export function useTimeout<S>(callback: Function, delay: number): IUseTimeout {
 </details>
 	
 <details>
-<summary>useThrottle{ hook 🪝 }</summary>
+<summary>useThrottle { hook 🪝 }</summary>
 
 ```typescript
 import { useState, useRef, useEffect } from 'react'
@@ -102,7 +102,7 @@ export function useThrottle<T>(value: T, interval = 250):T {
 </details>
 	
 <details>
-<summary>useFetch{ hook 🪝 }</summary>
+<summary>useFetch { hook 🪝 }</summary>
 
 ```typescript
 import { useCallback, useEffect, useState } from 'react'
@@ -144,7 +144,7 @@ const getFetch = useCallback(async (opt = options) => {
 </details>
 
 <details>
-<summary>useWindowEvent{ hook 🪝 }</summary>
+<summary>useWindowEvent { hook 🪝 }</summary>
 
 ```typescript
 import { useEffect } from "react"
