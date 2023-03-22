@@ -144,6 +144,27 @@ const getFetch = useCallback(async (opt = options) => {
 </details>
 
 <details>
+<summary>useWindowEvent{ hook 🪝 }</summary>
+
+```typescript
+import { useEffect } from "react"
+
+export function useWindowEvent(
+ type: string,
+ listener: EventListenerOrEventListenerObject,
+ options?: boolean | EventListenerOptions | undefined
+):void {
+ useEffect(() => {
+  if (typeof window !== 'undefined') {
+   window.addEventListener(type, listener, options)
+   return () => window.removeEventListener(type, listener, options)
+  }
+ }, [type, listener])
+}
+```
+</details>
+
+<details>
 <summary>useLocalStorage { hook 🪝 }</summary>
 
 ```typescript
